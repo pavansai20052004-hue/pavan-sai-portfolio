@@ -1,23 +1,78 @@
 :root {
   color-scheme: dark;
-  --bg: #050605;
-  --bg-soft: #0b0d0b;
+  /* Primary Colors - Dark Mode Essence */
+  --bg-deep-space: #050605;
+  --bg-carbon-black: #0b0d0b;
   --ink: #f7f2e8;
-  --muted: #b8b2a3;
-  --quiet: #7f7b70;
+  --muted-stone: #b8b2a3;
+  --warm-gray: #7f7b70;
   --line: rgba(247, 242, 232, 0.14);
   --panel: rgba(19, 22, 19, 0.78);
   --panel-solid: #121511;
-  --teal: #62e4cd;
-  --green: #9bd56e;
-  --amber: #f5bd70;
-  --coral: #ff755f;
-  --blue: #73a9ff;
-  --stone: #d5c8ae;
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  
+  /* Tech Accent Colors */
+  --electric-cyan: #62e4cd;
+  --sage-green: #9bd56e;
+  --amber-glow: #f5bd70;
+  --coral-red: #ff755f;
+  --sky-blue: #73a9ff;
+  --warm-stone: #d5c8ae;
+  --teal: var(--electric-cyan);
+  --green: var(--sage-green);
+  --amber: var(--amber-glow);
+  --coral: var(--coral-red);
+  --blue: var(--sky-blue);
+  --stone: var(--warm-stone);
+  --muted: var(--muted-stone);
+  --quiet: var(--warm-gray);
+  
+  /* Semantic Colors */
+  --security-red: #e74c3c;
+  --data-green: #27ae60;
+  --ai-purple: #9b59b6;
+  --devops-blue: #3498db;
+  
+  /* Gradients */
+  --gradient-tech: linear-gradient(90deg, var(--electric-cyan), var(--amber-glow));
+  --gradient-security: linear-gradient(90deg, var(--coral-red), var(--sage-green));
+  
+  /* Shadows & Depth */
+  --shadow-card: 0 20px 70px rgba(0, 0, 0, 0.22);
+  --shadow-hover: 0 24px 80px rgba(0, 0, 0, 0.45);
+  --shadow-console: 0 24px 80px rgba(0, 0, 0, 0.45);
+  --shadow-button: 0 8px 30px rgba(0, 0, 0, 0.18);
+  --shadow: var(--shadow-card);
+  
+  /* Spacing Scale */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+  --space-9: 128px;
+  
+  /* Border Radius */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 50%;
+  
+  /* Typography */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Animation Durations */
+  --duration-fast: 180ms;
+  --duration-normal: 700ms;
+  --duration-slow: 160ms;
+
+  font-family: var(--font-sans);
 }
 
 * {
@@ -26,7 +81,7 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--bg);
+  background: var(--bg-deep-space);
 }
 
 body {
@@ -34,9 +89,10 @@ body {
   background:
     radial-gradient(circle at top left, rgba(98, 228, 205, 0.12), transparent 28rem),
     radial-gradient(circle at 80% 20%, rgba(245, 189, 112, 0.12), transparent 24rem),
-    linear-gradient(180deg, #050605 0%, #090a08 43%, #0c0908 100%);
+    linear-gradient(180deg, var(--bg-deep-space) 0%, #090a08 43%, #0c0908 100%);
   color: var(--ink);
   overflow-x: hidden;
+  font-family: var(--font-sans);
 }
 
 a {
@@ -297,8 +353,24 @@ h1 {
 
 .hero h1 span {
   display: inline-block;
+  margin-right: 0.16em;
   opacity: 0;
   animation: fadeInUp 0.8s ease-out;
+}
+
+.hero h1 span:last-child {
+  margin-right: 0;
+}
+
+.hero-background-effects {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at var(--mouse-x, 72%) var(--mouse-y, 26%), rgba(98, 228, 205, 0.18), transparent 18rem),
+    radial-gradient(circle at 78% 44%, rgba(245, 189, 112, 0.14), transparent 22rem),
+    radial-gradient(circle at 64% 62%, rgba(115, 169, 255, 0.1), transparent 24rem);
 }
 
 @keyframes scrollPulse {
@@ -1234,6 +1306,92 @@ h1 {
   letter-spacing: 0;
 }
 
+.cta-section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto 32px;
+  padding: clamp(24px, 5vw, 46px);
+  border: 1px solid rgba(247, 242, 232, 0.17);
+  border-radius: 8px;
+}
+
+.cta-content {
+  display: grid;
+  gap: 18px;
+}
+
+.cta-content h2 {
+  margin: 0;
+  max-width: 860px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1;
+}
+
+.cta-content p {
+  max-width: 720px;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.cta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.site-footer {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 40px;
+  color: var(--muted);
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.footer-brand,
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-brand {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.footer-links {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--muted);
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  background: rgba(247, 242, 232, 0.08);
+  color: var(--ink);
+  outline: none;
+}
+
+.footer-copy p {
+  margin: 0;
+  text-align: right;
+  font-size: 0.9rem;
+}
+
 [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
@@ -1456,6 +1614,18 @@ h1 {
 
   .timeline-item {
     grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+  }
+
+  .footer-copy p {
+    text-align: left;
   }
 }
 
